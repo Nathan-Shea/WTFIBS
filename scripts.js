@@ -12,8 +12,8 @@ const quotes = [
 ];
 
 const recipeFiles = [
-  { file: 'recipes/recipe1.md', vegetarian: false },
-  { file: 'recipes/recipe2.md', vegetarian: true },
+  { file: './recipes/recipe1.md', vegetarian: false },
+  { file: './recipes/recipe2.md', vegetarian: true },
 ];
 
 function getRandomItem(arr) {
