@@ -1,0 +1,13 @@
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 2rem;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+

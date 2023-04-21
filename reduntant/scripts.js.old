@@ -1,0 +1,63 @@
+// scripts.js
+const quote = document.getElementById('quote');
+const recipeTitle = document.getElementById('recipe-title');
+const instructions = document.getElementById('instructions');
+const newRecipeBtn = document.getElementById('new-recipe');
+const vegetarianCheckbox = document.getElementById('vegetarian');
+
+// Create an array of quotes
+const quotes = [
+  'Quote number fucking one',
+  'Quote number fucking two',
+  'Quote number fucking 3',
+];
+
+// Create an array of recipe file names
+const recipeFiles = [
+  { file: 'recipes/recipe1.md', vegetarian: false },
+  { file: 'recipes/recipe2.md', vegetarian: true },
+  // Add more recipe file names here
+];
+
+function getRandomItem(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+async function fetchMarkdown(file) {
+  const response = await fetch(file);
+  if (!response.ok) {
+    throw new Error(`Error fetching ${file}: ${response.statusText}`);
+  }
+  const md = await response.text();
+  return marked(md);
+}
+
+async function displayNewRecipe() {
+  quote.textContent = getRandomItem(quotes);
+  const isVegetarian = vegetarianCheckbox.checked;
+  const filteredRecipes = recipeFiles.filter(recipe => recipe.vegetarian === isVegetarian);
+  const randomRecipe = getRandomItem(filteredRecipes);
+
+  try {
+    const mdContent = await fetchMarkdown(randomRecipe.file);
+    const parser = new DOMParser();
+    const mdDoc = parser.parseFromString(mdContent, 'text/html');
+    const titleElem = mdDoc.querySelector('h1, h2, h3, h4, h5, h6');
+    const titleText = titleElem ? titleElem.textContent : 'No title found';
+
+    recipeTitle.textContent = titleText;
+    titleElem.remove(); // Remove the title from the content
+    instructions.innerHTML = mdDoc.body.innerHTML;
+  } catch (error) {
+    console.error(error);
+    recipeTitle.textContent = 'Error loading recipe';
+    instructions.textContent = '';
+  }
+}
+
+newRecipeBtn.addEventListener('click', displayNewRecipe);
+vegetarianCheckbox.addEventListener('change', displayNewRecipe);
+
+// Display a random recipe on page load
+displayNewRecipe();
+

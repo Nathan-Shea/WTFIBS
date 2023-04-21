@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IBS-friendly Recipe fucking Generator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</head>
+<body>
+  <header>
+    <h1>IBS-friendly Recipe fucking Generator</h1>
+  </header>
+  <main>
+    <p id="quote"></p>
+    <h2 id="recipe-title"></h2>
+    <p id="instructions"></p>
+    <button id="new-recipe">I don't want fucking want that</button>
+    <div>
+      <input type="checkbox" id="vegetarian" name="vegetarian">
+      <label for="vegetarian">I am a fucking vegetarian</label>
+    </div>
+  </main>
+  <!-- Add this line before the scripts.js script tag -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>
+
